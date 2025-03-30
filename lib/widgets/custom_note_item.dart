@@ -1,17 +1,16 @@
-// ignore_for_file: deprecated_member_use, depend_on_referenced_packages
+// ignore_for_file: deprecated_member_use, depend_on_referenced_packages, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
-
+  const NoteItem({super.key, required this.color});
+  final color;
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          color: const Color(0xffFFCC80),
-          borderRadius: BorderRadius.circular(16)),
+      decoration:
+          BoxDecoration(color: color, borderRadius: BorderRadius.circular(16)),
       padding: const EdgeInsets.only(top: 25, bottom: 25),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,

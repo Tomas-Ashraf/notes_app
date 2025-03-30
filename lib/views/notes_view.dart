@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:notes_app/widgets/notes_view_body.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NotesView extends StatelessWidget {
   const NotesView({super.key});
@@ -38,6 +39,12 @@ class NotesView extends StatelessWidget {
         ],
       ),
       body: NotesViewBody(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: FaIcon(
+          FontAwesomeIcons.add,
+        ),
+      ),
     );
   }
 }
