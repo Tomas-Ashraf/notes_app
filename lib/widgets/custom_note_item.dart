@@ -27,7 +27,7 @@ class NoteItem extends StatelessWidget {
             subtitle: Padding(
               padding: const EdgeInsets.only(top: 16, bottom: 16),
               child: Text(
-                'Build your Career with Tomas Ashraf',
+                'Start Mobile Development By Flutter',
                 style: TextStyle(
                     color: Colors.black.withOpacity(.5), fontSize: 18),
               ),
