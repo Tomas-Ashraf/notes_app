@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:notes_app/widgets/custom_button.dart';
 import 'package:notes_app/widgets/custom_text_field.dart';
 import 'package:notes_app/widgets/notes_view_body.dart';
 
@@ -67,38 +68,27 @@ class AddNoteBottomSheet extends StatelessWidget {
     return Padding(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding:
-                const EdgeInsets.only(top: 30, bottom: 15, left: 16, right: 16),
-            child: CustomTextField(
-              label: 'Title',
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 30, bottom: 15, left: 16, right: 16),
+              child: CustomTextField(
+                label: 'Title',
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20, left: 16, right: 16),
-            child: CustomTextField(
-              label: 'Content',
-              maxLines: 5,
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20, left: 16, right: 16),
+              child: CustomTextField(
+                label: 'Content',
+                minLines: 5,
+              ),
             ),
-          ),
-          Padding(
-              padding: const EdgeInsets.only(bottom: 20, left: 10, right: 10),
-              child: Container(
-                width: 700,
-                height: 50,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8)),
-                child: Center(
-                    child: Text(
-                  'Add',
-                  style: TextStyle(color: Colors.black),
-                )),
-              )),
-        ],
+            CustomButton(),
+          ],
+        ),
       ),
     );
   }
