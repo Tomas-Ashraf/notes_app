@@ -1,9 +1,10 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
 import 'package:notes_app/widgets/custom_button.dart';
 import 'package:notes_app/widgets/custom_text_field.dart';
 import 'package:notes_app/widgets/notes_view_body.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NotesView extends StatelessWidget {
   const NotesView({super.key});
@@ -29,8 +30,8 @@ class NotesView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16)),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.search,
+                  child: FaIcon(
+                    FontAwesomeIcons.search,
                     size: 28,
                   ),
                 ),
