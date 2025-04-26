@@ -1,8 +1,10 @@
 // ignore_for_file: deprecated_member_use, depend_on_referenced_packages
 
+
 import 'package:flutter/material.dart';
 import 'package:notes_app/widgets/custom_button.dart';
 import 'package:notes_app/widgets/custom_text_field.dart';
+
 import 'package:notes_app/widgets/notes_view_body.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -61,8 +63,19 @@ class NotesView extends StatelessWidget {
   }
 }
 
-class AddNoteBottomSheet extends StatelessWidget {
+class AddNoteBottomSheet extends StatefulWidget {
   const AddNoteBottomSheet({super.key});
+
+  @override
+  State<AddNoteBottomSheet> createState() => _AddNoteBottomSheetState();
+}
+
+class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
+  final GlobalKey<FormState> formKey = GlobalKey();
+
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
+  String? title, subTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -70,27 +83,103 @@ class AddNoteBottomSheet extends StatelessWidget {
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 30, bottom: 15, left: 16, right: 16),
-              child: CustomTextField(
-                label: 'Title',
+        child: Form(
+          key: formKey,
+          // autovalidateMode: autovalidateMode,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 30, bottom: 15, left: 16, right: 16),
+                child: CustomTextFormField(
+                  label: 'Title',
+                  onSaved: (value) {
+                    title = value;
+                  },
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20, left: 16, right: 16),
-              child: CustomTextField(
-                label: 'Content',
-                minLines: 5,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20, left: 16, right: 16),
+                child: CustomTextFormField(
+                  label: 'Content',
+                  onSaved: (value) {
+                    subTitle = value;
+                  },
+                  minLines: 5,
+                ),
               ),
-            ),
-            CustomButton(),
-          ],
+              CustomButton(
+                onTap: () {
+                  if (formKey.currentState!.validate()) {
+                    formKey.currentState!.save();
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
+                    setState(() {});
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+// class AddNoteForm extends StatefulWidget {
+//   const AddNoteForm({
+//     super.key,
+//   });
+
+//   @override
+//   State<AddNoteForm> createState() => _AddNoteFormState();
+// }
+
+// class _AddNoteFormState extends State<AddNoteForm> {
+//   @override
+//   Widget build(BuildContext context) {
+//     final GlobalKey<FormState> formKey = GlobalKey();
+//     AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+//     String? title, subTitle;
+//     return Form(
+//       key: formKey,
+//       // autovalidateMode: autovalidateMode,
+//       child: Column(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           Padding(
+//             padding:
+//                 const EdgeInsets.only(top: 30, bottom: 15, left: 16, right: 16),
+//             child: CustomTextFormField(
+//               label: 'Title',
+//               onSaved: (value) {
+//                 title = value;
+//               },
+//             ),
+//           ),
+//           Padding(
+//             padding: const EdgeInsets.only(bottom: 20, left: 16, right: 16),
+//             child: CustomTextFormField(
+//               label: 'Content',
+//               onSaved: (value) {
+//                 subTitle = value;
+//               },
+//               minLines: 5,
+//             ),
+//           ),
+//           CustomButton(
+//               onTap: () {
+//                 if (formKey.currentState!.validate()) {
+//                   formKey.currentState!.save();
+//                 } else {
+//                   autovalidateMode = AutovalidateMode.always;
+//                   setState(() {});
+//                 }
+//               },
+//               ),
+//         ],
+//       ),
+//     );
+//   }
+// }

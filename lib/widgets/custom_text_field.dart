@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/constants.dart';
 
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({super.key, required this.label, this.minLines});
+class CustomTextFormField extends StatefulWidget {
+  const CustomTextFormField(
+      {super.key, required this.label, this.minLines, this.onSaved});
   final String label;
   final int? minLines;
+  final void Function(String?)? onSaved;
 
   @override
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  @override
   Widget build(BuildContext context) {
-    return TextField(
-      maxLines: minLines,
-      minLines: minLines,
+    return TextFormField(
+      onSaved: widget.onSaved,
+      validator: (value) {
+        if (value?.isEmpty ?? true) {
+          return 'Field is required';
+        } else {
+          return null;
+        }
+      },
+      maxLines: widget.minLines,
+      minLines: widget.minLines,
       cursorColor: kPrimaryColor,
       decoration: InputDecoration(
-        label: Text(label),
+        label: Text(widget.label),
         border: buildBorder(),
         enabledBorder: buildBorder(),
         focusedBorder: buildBorder(
