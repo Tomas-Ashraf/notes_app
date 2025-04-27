@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:notes_app/cubits/notes_cubit.dart';
+import 'package:notes_app/cubits/add_note_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/widgets/custom_button.dart';
 import 'package:notes_app/widgets/custom_text_field.dart';
@@ -115,7 +115,7 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
-                    NotesCubit().addNote(
+                    AddNoteCubit().addNote(
                       NoteModel(
                           title: title!,
                           subTitle: subTitle!,
