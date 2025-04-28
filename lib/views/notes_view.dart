@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 
-import 'package:notes_app/widgets/add_note_bottomSheet.dart';
+import 'package:notes_app/widgets/add_note_bottomsheet.dart';
 
 
 import 'package:notes_app/widgets/notes_view_body.dart';

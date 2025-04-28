@@ -1,24 +1,14 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:notes_app/cubits/add_note_cubit.dart';
-import 'package:notes_app/models/note_model.dart';
-import 'package:notes_app/widgets/custom_button.dart';
-import 'package:notes_app/widgets/custom_text_field.dart';
+import 'package:notes_app/cubits/add_notes_states.dart';
+import 'package:notes_app/widgets/add_note_form.dart';
 
-class AddNoteBottomSheet extends StatefulWidget {
+class AddNoteBottomSheet extends StatelessWidget {
   const AddNoteBottomSheet({super.key});
-
-  @override
-  State<AddNoteBottomSheet> createState() => _AddNoteBottomSheetState();
-}
-
-class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
-  final GlobalKey<FormState> formKey = GlobalKey();
-
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-
-  String? title, subTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -26,51 +16,21 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: SingleChildScrollView(
-        child: Form(
-          key: formKey,
-          // autovalidateMode: autovalidateMode,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 30, bottom: 15, left: 16, right: 16),
-                child: CustomTextFormField(
-                  label: 'Title',
-                  onSaved: (value) {
-                    title = value;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20, left: 16, right: 16),
-                child: CustomTextFormField(
-                  label: 'Content',
-                  onSaved: (value) {
-                    subTitle = value;
-                  },
-                  minLines: 5,
-                ),
-              ),
-              CustomButton(
-                onTap: () {
-                  if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
-                    AddNoteCubit().addNote(
-                      NoteModel(
-                          title: title!,
-                          subTitle: subTitle!,
-                          date: 'date',
-                          color: 1),
-                    );
-                  } else {
-                    autovalidateMode = AutovalidateMode.always;
-                    setState(() {});
-                  }
-                },
-              ),
-            ],
-          ),
+        child: BlocConsumer<AddNoteCubit, AddNoteStates>(
+          listener: (context, state) {
+            if (state is AddNoteFailed) {
+              print('Failed : ${state.errMessage}');
+            }
+            if (state is AddNoteSuccess) {
+              Navigator.pop(context);
+            }
+          },
+          builder: (context, state) {
+            return ModalProgressHUD(
+              inAsyncCall: state is AddNoteLoading ? true : false,
+              child: const AddNoteForm(),
+            );
+          },
         ),
       ),
     );
