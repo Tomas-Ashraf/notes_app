@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, avoid_print
+// ignore_for_file: file_names, avoid_print, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,26 +12,29 @@ class AddNoteBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: SingleChildScrollView(
-        child: BlocConsumer<AddNoteCubit, AddNoteStates>(
-          listener: (context, state) {
-            if (state is AddNoteFailed) {
-              print('Failed : ${state.errMessage}');
-            }
-            if (state is AddNoteSuccess) {
-              Navigator.pop(context);
-            }
-          },
-          builder: (context, state) {
-            return ModalProgressHUD(
+    return BlocProvider(
+      create: (context) => AddNoteCubit(),
+      child: BlocConsumer<AddNoteCubit, AddNoteStates>(
+        listener: (context, state) {
+          if (state is AddNoteFailed) {
+            print('Failed : ${state.errMessage}');
+          }
+          if (state is AddNoteSuccess) {
+            Navigator.pop(context);
+          }
+        },
+        builder: (context, state) {
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: ModalProgressHUD(
               inAsyncCall: state is AddNoteLoading ? true : false,
-              child: const AddNoteForm(),
-            );
-          },
-        ),
+              child: SingleChildScrollView(
+                child: const AddNoteForm(),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

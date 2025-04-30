@@ -8,17 +8,27 @@ class SimpleBlocObserver implements BlocObserver {
   }
 
   @override
-  void onClose(BlocBase bloc) {}
+  void onClose(BlocBase bloc) {
+    debugPrint('Close = $bloc');
+  }
 
   @override
-  void onCreate(BlocBase bloc) {}
+  void onCreate(BlocBase bloc) {
+    debugPrint('Create: ${bloc.toString()}');
+  }
 
   @override
-  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {}
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    debugPrint('Bloc: $bloc Error: $error StackTrace: $stackTrace');
+  }
 
   @override
-  void onEvent(Bloc bloc, Object? event) {}
+  void onEvent(Bloc bloc, Object? event) {
+    debugPrint('Bloc: $bloc Event: $event');
+  }
 
   @override
-  void onTransition(Bloc bloc, Transition transition) {}
+  void onTransition(Bloc bloc, Transition transition) {
+    debugPrint('Bloc: $bloc Transition: $transition');
+  }
 }

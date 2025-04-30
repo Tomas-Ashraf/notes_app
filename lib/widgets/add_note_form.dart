@@ -13,58 +13,58 @@ class AddNoteForm extends StatefulWidget {
 }
 
 class _AddNoteFormState extends State<AddNoteForm> {
-    final GlobalKey<FormState> formKey = GlobalKey();
+  final GlobalKey<FormState> formKey = GlobalKey();
 
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String? title, subTitle;
 
   @override
   Widget build(BuildContext context) {
-    return  Form(
-          key: formKey,
-          // autovalidateMode: autovalidateMode,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 30, bottom: 15, left: 16, right: 16),
-                child: CustomTextFormField(
-                  label: 'Title',
-                  onSaved: (value) {
-                    title = value;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20, left: 16, right: 16),
-                child: CustomTextFormField(
-                  label: 'Content',
-                  onSaved: (value) {
-                    subTitle = value;
-                  },
-                  minLines: 5,
-                ),
-              ),
-              CustomButton(
-                onTap: () {
-                  if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
-                    BlocProvider.of<AddNoteCubit>(context).addNote(
-                      NoteModel(
-                          title: title!,
-                          subTitle: subTitle!,
-                          date: 'date',
-                          color: 1),
-                    );
-                  } else {
-                    autovalidateMode = AutovalidateMode.always;
-                    setState(() {});
-                  }
-                },
-              ),
-            ],
+    return Form(
+      key: formKey,
+      // autovalidateMode: autovalidateMode,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 30, bottom: 15, left: 16, right: 16),
+            child: CustomTextFormField(
+              label: 'Title',
+              onSaved: (value) {
+                title = value;
+              },
+            ),
           ),
-        );
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20, left: 16, right: 16),
+            child: CustomTextFormField(
+              label: 'Content',
+              onSaved: (value) {
+                subTitle = value;
+              },
+              minLines: 5,
+            ),
+          ),
+          CustomButton(
+            onTap: () {
+              if (formKey.currentState!.validate()) {
+                formKey.currentState!.save();
+                var noteModel = NoteModel(
+                    title: title!,
+                    subTitle: subTitle!,
+                    date: DateTime.now().toString(),
+                    color: 1);
+
+                BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+              } else {
+                autovalidateMode = AutovalidateMode.always;
+                setState(() {});
+              }
+            },
+          ),
+        ],
+      ),
+    );
   }
 }
