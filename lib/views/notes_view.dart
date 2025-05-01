@@ -1,6 +1,8 @@
 // ignore_for_file: deprecated_member_use, depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/cubits/cubit/notes_cubit_cubit.dart';
 
 import 'package:notes_app/widgets/add_note_bottomsheet.dart';
 
@@ -12,51 +14,54 @@ class NotesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Notes',
-          style: TextStyle(fontSize: 30),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                height: 46,
-                width: 46,
-                decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(.05),
-                    borderRadius: BorderRadius.circular(16)),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: FaIcon(
-                    FontAwesomeIcons.search,
-                    size: 28,
+    return BlocProvider(
+      create: (context) => NotesCubit()..fetchAllNotes(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Notes',
+            style: TextStyle(fontSize: 30),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: GestureDetector(
+                onTap: () {},
+                child: Container(
+                  height: 46,
+                  width: 46,
+                  decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(.05),
+                      borderRadius: BorderRadius.circular(16)),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: FaIcon(
+                      FontAwesomeIcons.search,
+                      size: 28,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-      body: const NotesViewBody(),
-      floatingActionButton: FloatingActionButton(
-        isExtended: true,
-        onPressed: () {
-           showModalBottomSheet(
-            isScrollControlled: true,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            context: context,
-            builder: (context) {
-              return const AddNoteBottomSheet();
-            },
-          );
-        },
-        child: Icon(Icons.add),
+          ],
+        ),
+        body: const NotesViewBody(),
+        floatingActionButton: FloatingActionButton(
+          isExtended: true,
+          onPressed: () {
+            showModalBottomSheet(
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              context: context,
+              builder: (context) {
+                return const AddNoteBottomSheet();
+              },
+            );
+          },
+          child: Icon(Icons.add),
+        ),
       ),
     );
   }
