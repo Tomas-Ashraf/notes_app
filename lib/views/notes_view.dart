@@ -2,20 +2,25 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app/cubits/cubit/notes_cubit_cubit.dart';
+import 'package:notes_app/cubits/cubit/notes_cubit.dart';
 
 import 'package:notes_app/widgets/add_note_bottomsheet.dart';
 
 import 'package:notes_app/widgets/notes_view_body.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class NotesView extends StatelessWidget {
+class NotesView extends StatefulWidget {
   const NotesView({super.key});
 
   @override
+  State<NotesView> createState() => _NotesViewState();
+}
+
+class _NotesViewState extends State<NotesView> {
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NotesCubit()..fetchAllNotes(),
+      create: (context) => NotesCubit(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
