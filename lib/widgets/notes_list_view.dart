@@ -13,6 +13,7 @@ class NotesListView extends StatelessWidget {
   Widget build(BuildContext context) {
     var colors = const [
       Colors.amber,
+      Colors.blueAccent,
       Colors.green,
       Colors.grey,
       Colors.cyan,
@@ -36,9 +37,7 @@ class NotesListView extends StatelessWidget {
           itemBuilder: (context, index) => Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: NoteItem(
-              title: notes[index].title,
-              subTitle: notes[index].subTitle,
-              date: notes[index].date,
+              note: notes[index],
               color: colors[index],
             ),
           ),
