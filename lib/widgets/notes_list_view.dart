@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:notes_app/cubits/cubit/notes_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/widgets/custom_note_item.dart';
@@ -11,23 +12,31 @@ class NotesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var colors = const [
-      Colors.amber,
-      Colors.blueAccent,
-      Colors.green,
-      Colors.grey,
-      Colors.cyan,
-      Colors.blueAccent,
-      Colors.amber,
-      Colors.green,
-      Colors.grey,
-      Colors.cyan,
-      Colors.blueAccent,
-      Colors.amber,
-      Colors.green,
-      Colors.grey,
-      Colors.cyan,
-      Colors.blueAccent,
+    var colors = [
+      HexColor('FED2E2'),
+      HexColor('E9A5F1'),
+      HexColor('C68EFD'),
+      HexColor('8F87F1'),
+      HexColor('FED2E2'),
+      HexColor('E9A5F1'),
+      HexColor('C68EFD'),
+      HexColor('8F87F1'),
+      HexColor('FED2E2'),
+      HexColor('E9A5F1'),
+      HexColor('C68EFD'),
+      HexColor('8F87F1'),
+      HexColor('FED2E2'),
+      HexColor('E9A5F1'),
+      HexColor('C68EFD'),
+      HexColor('8F87F1'),
+      HexColor('FED2E2'),
+      HexColor('E9A5F1'),
+      HexColor('C68EFD'),
+      HexColor('8F87F1'),
+      HexColor('FED2E2'),
+      HexColor('E9A5F1'),
+      HexColor('C68EFD'),
+      HexColor('8F87F1'),
     ];
     return BlocBuilder<NotesCubit, NotesState>(
       builder: (context, state) {

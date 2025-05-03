@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/views/edit_note_view.dart';
+import 'package:notes_app/views/notes_view.dart';
 
 class NoteItem extends StatelessWidget {
   const NoteItem({
@@ -51,7 +52,15 @@ class NoteItem extends StatelessWidget {
                 ),
               ),
               trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    note.delete();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NotesView(),
+                      ),
+                    );
+                  },
                   icon: FaIcon(
                     FontAwesomeIcons.trash,
                     color: Colors.black,

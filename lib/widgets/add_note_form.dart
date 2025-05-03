@@ -60,7 +60,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                     var noteModel = NoteModel(
                         title: title!,
                         subTitle: subTitle!,
-                        date: DateFormat("yyyy-MM-dd")
+                        date: DateFormat.yMMMd()
                             .format(DateTime.now())
                             .toString(),
                         color: 1);
