@@ -1,9 +1,13 @@
+// ignore_for_file: sized_box_for_whitespace
+
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes_app/cubits/add_note_cubit/add_notes_states.dart';
 import 'package:notes_app/models/note_model.dart';
+import 'package:notes_app/widgets/colors_list_view.dart';
 import 'package:notes_app/widgets/custom_button.dart';
 import 'package:notes_app/widgets/custom_text_field.dart';
 
@@ -50,6 +54,10 @@ class _AddNoteFormState extends State<AddNoteForm> {
               minLines: 5,
             ),
           ),
+          Container(width: 300, height: 50, child: ColorsListView()),
+          SizedBox(
+            height: 16,
+          ),
           BlocBuilder<AddNoteCubit, AddNoteStates>(
             builder: (context, state) {
               return CustomButton(
@@ -66,7 +74,6 @@ class _AddNoteFormState extends State<AddNoteForm> {
                         color: 1);
 
                     BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
-                    
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                     setState(() {});
