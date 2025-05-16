@@ -15,6 +15,7 @@ class NoteItem extends StatelessWidget {
   });
   final NoteModel note;
   final color;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -23,7 +24,9 @@ class NoteItem extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return EditNoteView();
+              return EditNoteView(
+                noteModel: note,
+              );
             },
           ),
         );
@@ -56,12 +59,6 @@ class NoteItem extends StatelessWidget {
                   onPressed: () {
                     note.delete();
                     BlocProvider.of<NotesCubit>(context).fetchAllNotes();
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => NotesView(),
-                    //   ),
-                    // );
                   },
                   icon: FaIcon(
                     FontAwesomeIcons.trash,

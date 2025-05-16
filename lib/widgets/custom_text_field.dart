@@ -3,10 +3,15 @@ import 'package:notes_app/constants.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField(
-      {super.key, required this.label, this.minLines, this.onSaved});
+      {super.key,
+      required this.label,
+      this.minLines,
+      this.onSaved,
+      this.onChanged});
   final String label;
   final int? minLines;
   final void Function(String?)? onSaved;
+  final void Function(String?)? onChanged;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -17,6 +22,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   Widget build(BuildContext context) {
     return TextFormField(
       onSaved: widget.onSaved,
+      onChanged: widget.onChanged,
       validator: (value) {
         if (value?.isEmpty ?? true) {
           return 'Field is required';
