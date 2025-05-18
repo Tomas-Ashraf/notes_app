@@ -1,48 +1,63 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
-// class ColorsListView extends StatelessWidget {
-//   const ColorsListView({
-//     super.key,
-//   });
+class ColorsListView extends StatefulWidget {
+  const ColorsListView({
+    super.key,
+  });
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView.builder(
-//       itemCount: 10,
-//       scrollDirection: Axis.horizontal,
-//       itemBuilder: (context, index) {
-//         return ColorItem(
-//           isActive: true,
-//         );
-//       },
-//     );
-//   }
-// }
+  @override
+  State<ColorsListView> createState() => _ColorsListViewState();
+}
 
-// class ColorItem extends StatefulWidget {
-//   const ColorItem({super.key, required this.isActive});
-//   final bool isActive;
+class _ColorsListViewState extends State<ColorsListView> {
+  int currentIndex = 0;
+  final List<Color> colors = const [
+    Color(0xff335c67),
+    Color(0xfffff3b0),
+    Color(0xffe09f3e),
+    Color(0xff9e2a2b),
+    Color(0xff540b0e),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: colors.length,
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {
+            currentIndex = index;
+            setState(() {});
+          },
+          child: ColorItem(
+            isActive: currentIndex == index,
+            color: colors[index],
+          ),
+        );
+      },
+    );
+  }
+}
 
-//   @override
-//   State<ColorItem> createState() => _ColorItemState();
-// }
+class ColorItem extends StatelessWidget {
+  const ColorItem({super.key, required this.isActive, required this.color});
+  final bool isActive;
+  final Color color;
 
-// class _ColorItemState extends State<ColorItem> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return
-//      widget.isActive
-//         ? CircleAvatar(
-//             backgroundColor: Colors.white,
-//             radius: 38,
-//             child: CircleAvatar(
-//               radius: 45,
-//               backgroundColor: Colors.blue,
-//             ),
-//           )
-//         : CircleAvatar(
-//             radius: 36,
-//             backgroundColor: Colors.blue,
-//           );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return isActive
+        ? CircleAvatar(
+            backgroundColor: Colors.white,
+            radius: 36,
+            child: CircleAvatar(
+              radius: 20,
+              backgroundColor: color,
+            ),
+          )
+        : CircleAvatar(
+            radius: 36,
+            backgroundColor: color,
+          );
+  }
+}

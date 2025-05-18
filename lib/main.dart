@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes_app/constants.dart';
 import 'package:notes_app/cubits/cubit/notes_cubit.dart';
@@ -13,11 +12,11 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(NoteModelAdapter());
   await Hive.openBox<NoteModel>(kNotesBox);
-  runApp( NotesApp());
+  runApp(NotesApp());
 }
 
- class NotesApp extends StatelessWidget {
-   NotesApp({super.key});
+class NotesApp extends StatelessWidget {
+  const NotesApp({super.key});
 
   // This widget is the root of your application.
   @override

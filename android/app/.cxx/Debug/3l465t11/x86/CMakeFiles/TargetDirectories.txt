@@ -1,0 +1,2 @@
+E:/Self Study/Mobile Application Course/Tharwat Samy's Course/Test/notes_app/notes_app/android/app/.cxx/Debug/3l465t11/x86/CMakeFiles/edit_cache.dir
+E:/Self Study/Mobile Application Course/Tharwat Samy's Course/Test/notes_app/notes_app/android/app/.cxx/Debug/3l465t11/x86/CMakeFiles/rebuild_cache.dir
