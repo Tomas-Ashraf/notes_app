@@ -4,12 +4,14 @@ import 'package:notes_app/constants.dart';
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField(
       {super.key,
-      required this.label,
+      this.label,
       this.minLines,
       this.onSaved,
-      this.onChanged});
-  final String label;
+      this.onChanged,
+      this.hint});
+  final String? label;
   final int? minLines;
+  final String? hint;
   final void Function(String?)? onSaved;
   final void Function(String?)? onChanged;
 
@@ -34,7 +36,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       minLines: widget.minLines,
       cursorColor: kPrimaryColor,
       decoration: InputDecoration(
-        label: Text(widget.label),
+        label: Text(widget.label ?? ''),
+        hintText: widget.hint,
         border: buildBorder(),
         enabledBorder: buildBorder(),
         focusedBorder: buildBorder(

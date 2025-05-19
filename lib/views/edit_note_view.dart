@@ -1,11 +1,14 @@
-// ignore_for_file: deprecated_member_use, depend_on_referenced_packages
+// ignore_for_file: deprecated_member_use, depend_on_referenced_packages, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:notes_app/cubits/cubit/notes_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
+
 import 'package:notes_app/widgets/custom_text_field.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes_app/widgets/edit_note_color_list.dart';
 
 class EditNoteView extends StatefulWidget {
   const EditNoteView({super.key, required this.noteModel});
@@ -62,6 +65,7 @@ class _EditNoteViewState extends State<EditNoteView> {
           children: [
             CustomTextFormField(
               label: 'Title',
+              hint: widget.noteModel.title,
               onChanged: (value) {
                 title = value;
               },
@@ -71,11 +75,21 @@ class _EditNoteViewState extends State<EditNoteView> {
             ),
             CustomTextFormField(
               label: 'Content',
+              hint: widget.noteModel.subTitle,
               minLines: 5,
               onChanged: (value) {
                 content = value;
               },
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+                width: 350,
+                height: 50,
+                child: EditNoteColorList(
+                  note: widget.noteModel,
+                )),
           ],
         ),
       ),
