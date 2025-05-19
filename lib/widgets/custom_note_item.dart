@@ -10,11 +10,9 @@ import 'package:notes_app/views/edit_note_view.dart';
 class NoteItem extends StatelessWidget {
   const NoteItem({
     super.key,
-    required this.color,
     required this.note,
   });
   final NoteModel note;
-  final color;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class NoteItem extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: color, borderRadius: BorderRadius.circular(16)),
+            color: Color(note.color), borderRadius: BorderRadius.circular(16)),
         padding: const EdgeInsets.only(top: 25, bottom: 25),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,

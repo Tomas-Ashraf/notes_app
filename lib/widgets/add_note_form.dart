@@ -1,4 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace
+// ignore_for_file: sized_box_for_whitespace, avoid_print, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -54,7 +54,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
               minLines: 5,
             ),
           ),
-          Container(width: 300, height: 50, child: ColorsListView()),
+          Container(width: 350, height: 50, child: ColorsListView()),
           SizedBox(
             height: 16,
           ),
@@ -66,12 +66,12 @@ class _AddNoteFormState extends State<AddNoteForm> {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
                     var noteModel = NoteModel(
-                        title: title!,
-                        subTitle: subTitle!,
-                        date: DateFormat.yMMMd()
-                            .format(DateTime.now())
-                            .toString(),
-                        color: 1);
+                      title: title!,
+                      subTitle: subTitle!,
+                      date:
+                          DateFormat.yMMMd().format(DateTime.now()).toString(),
+                      color: BlocProvider.of<AddNoteCubit>(context).color.value,
+                    );
 
                     BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
                   } else {
